@@ -12,7 +12,8 @@ const getProjects = async (req, res) => {
 
 // Create a new project
 const createProject = async (req, res) => {
-    const { image, title, technologies, description, link } = req.body;
+    const { title, technologies, description, link } = req.body;
+    const image = req.file ? req.file.path : '';
 
     try {
         const newProject = new Project({ image, title, technologies, description, link });
@@ -26,7 +27,8 @@ const createProject = async (req, res) => {
 // Update a project
 const updateProject = async (req, res) => {
     const { id } = req.params;
-    const { image, title, technologies, description, link } = req.body;
+    const { title, technologies, description, link } = req.body;
+    const image = req.file ? req.file.path : '';
 
     try {
         const updatedProject = await Project.findByIdAndUpdate(

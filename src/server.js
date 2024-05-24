@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/database');
+const path = require('path');
 
 dotenv.config();
 
@@ -10,7 +11,12 @@ const PORT = process.env.PORT || 3000;
 // Connect to the database
 connectDB();
 
+
+
 app.use(express.json());
+
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
 
 app.get('/', (req, res) => {
     res.send('API is running...');
